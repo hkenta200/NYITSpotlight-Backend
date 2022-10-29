@@ -7,6 +7,8 @@ const morgan = require("morgan");
 const userRoute = require("./endpoints/users");
 const authRoute = require("./endpoints/auth");
 const contentRoute = require("./endpoints/content");
+const conversationRoute = require("./endpoints/conversations");
+const messageRoute = require("./endpoints/messages");
 
 dotenv.config();
 
@@ -21,6 +23,9 @@ app.use(morgan("common"));
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/content", contentRoute);
+app.use('/conversations', conversationRoute);
+app.use('/messages', messageRoute);
+
 
 app.listen(8800, ()=>{
     console.log("Backend server is running!!!")
