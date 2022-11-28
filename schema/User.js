@@ -21,6 +21,17 @@ const UserSchema = new mongoose.Schema({
         required: true,
         min: 6
     },
+    sex:{
+        type: String,
+        min: 6,
+        default: "Male",
+    },
+    firstName:{
+        type: String,
+    },
+    lastName:{
+        type: String,
+    },
     from:{
         type: String,
         max: 50
@@ -37,9 +48,14 @@ const UserSchema = new mongoose.Schema({
         type: String,
         max: 50
     },
+    NYITID:{
+        type: String,
+        min: 6,
+        max: 10
+    },
     profilePicture:{
         type: String,
-        default: ""
+        default: "https://cdn1.iconfinder.com/data/icons/user-pictures/100/male3-512.png"
     },
     coverPicture:{
         type: String, 

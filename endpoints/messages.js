@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Message = require('../models/MessageModel')
+const Message = require('../schema/MessageModel')
 
 //new messages
 router.post('/', async (req, res) => {

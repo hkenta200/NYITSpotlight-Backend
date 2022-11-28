@@ -2,8 +2,11 @@ const router = require("express").Router();
 const Post = require("../schema/Post");
 
 //Add post
-router.post("/", async (req, res)=>{
-    const post = new Post(req.body);
+router.post("/post", async (req, res)=>{
+    const post = new Post({
+      desc:req.body.message,
+      userId:req.body.userId
+  });
     try{
         const savedPost = await post.save();
         res.status(200).json(savedPost);

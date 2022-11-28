@@ -7,6 +7,10 @@ router.post("/registerUser", async (req, res)=>{
         username:req.body.username,
         email:req.body.email,
         password:req.body.password,
+        sex:req.body.sex,
+        NYITID:req.body.NYITID,
+        year:req.body.year,
+        campus:req.body.campus,
     });
 
     try{
