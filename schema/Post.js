@@ -7,21 +7,40 @@ const PostSchema = new mongoose.Schema({
             type: String,
             required: true,
         },
+        postId:{
+            type: String,
+        },
+        postDate:{
+            type: String,
+        },
         desc:{
             type: String,
             max: 500
         },
         image:{
-            type: String
+            type: String,
+            default: null
         },
         likes:{
             type: Array,
             default: []
         },
+        isLiked:{
+            type: Boolean,
+            default: false
+        },
         dislikes:{
             type: Array,
             default: []
-        }
+        },
+        comments:{
+            type: Array,
+            default: []
+        },
+        numberOfComments:{
+            type: Array,
+            default: []
+        },
     },
     {timestamps: true}
 );

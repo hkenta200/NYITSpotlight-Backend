@@ -1,12 +1,10 @@
 const router = require("express").Router();
 const Post = require("../schema/Post");
-
+const User = require("../schema/User");
+ 
 //Add post
 router.post("/post", async (req, res)=>{
-    const post = new Post({
-      desc:req.body.message,
-      userId:req.body.userId
-  });
+    const post = new Post(req.body);
     try{
         const savedPost = await post.save();
         res.status(200).json(savedPost);
@@ -14,34 +12,38 @@ router.post("/post", async (req, res)=>{
         res.status(500).json(err);
     }
 });
-
+ 
 //Get post
 //This :id is the post id, not userId
-router.get("/:id", async (req, res) => {
+/*router.get("/:id", async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
       res.status(200).json(post);
     } catch (err) {
       res.status(500).json(err);
     }
-});
-
+});*/
+ 
 //Get all Posts for feed
-router.get("/feed/all", async (req, res) => {
+  router.post("/timeline/all", async (req, res) => {
     try {
+      /* console.log(req.body.userId) */
       const currentUser = await User.findById(req.body.userId);
+      /* console.log(currentUser) */
       const userPosts = await Post.find({ userId: currentUser._id });
-      const followingPosts = await Promise.all(
-        currentUser.following.map((followingId) => {
-          return Post.find({ userId: followingId });
+ 
+      const friendPosts = await Promise.all(
+        currentUser.following.map((friendId) => {
+          return Post.find({ userId: friendId });
         })
       );
-      res.status(200).json(userPosts.concat(...followingPosts));
+      res.json(userPosts.concat(...friendPosts))
     } catch (err) {
       res.status(500).json(err);
     }
   });
-
+ 
+ 
 //Update post
 //This :id is the post id, not userId
 router.put("/:id", async (req, res)=>{
@@ -57,7 +59,7 @@ router.put("/:id", async (req, res)=>{
         res.status(500).json(err);
     }
 });
-
+ 
 //Delete post
 //This :id is the post id, not userId
 router.delete("/:id", async (req, res) => {
@@ -73,7 +75,7 @@ router.delete("/:id", async (req, res) => {
       res.status(500).json(err);
     }
   });
-
+ 
 //Like Post
 //This :id is the post id, not userId
 router.put("/:id/like", async (req, res) => {
@@ -90,5 +92,5 @@ router.put("/:id/like", async (req, res) => {
       res.status(500).json(err);
     }
   });
-
+ 
 module.exports = router;
