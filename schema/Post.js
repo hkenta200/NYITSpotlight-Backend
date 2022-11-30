@@ -12,6 +12,7 @@ const PostSchema = new mongoose.Schema({
         },
         postDate:{
             type: String,
+            
         },
         desc:{
             type: String,
@@ -25,17 +26,21 @@ const PostSchema = new mongoose.Schema({
             type: Array,
             default: []
         },
+        likesCount:{
+            type: String,
+            default: "0"
+        },
         isLiked:{
             type: Boolean,
             default: false
         },
-        dislikes:{
-            type: Array,
-            default: []
-        },
         comments:{
             type: Array,
             default: []
+        },
+        commentsCount:{
+            type: String,
+            default: "0"
         },
         numberOfComments:{
             type: Array,
