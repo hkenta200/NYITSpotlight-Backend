@@ -1,3 +1,5 @@
+Created Using MongoDB + Express.js + Node.js
+
 This is the backend "server side" of NYIT Spotlight created with Node.js/Express.js/MongoDB (+middleware) 
 Files with lowercase indicate the actions (rest api endpoints)
 Files with uppercase indicate the schema (information fields to retreival)
